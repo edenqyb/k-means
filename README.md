@@ -36,6 +36,6 @@ It works by repeatedly assigning points to the nearest cluster center (centroid)
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/kmeans.git
-cd kmeans
+git clone https://github.com/edenqyb/k-means.git
+cd k-means
 pip install -r requirements.txt
