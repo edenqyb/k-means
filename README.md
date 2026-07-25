@@ -29,7 +29,7 @@ It works by repeatedly assigning points to the nearest cluster center (centroid)
 
 - Pure Python / NumPy implementation (no scikit-learn)
 - `fit` / `predict` API
-- Elbow method via inertia (WCSS) to help choose `K`
+- Elbow method via SSE to help choose `K`
 - Matplotlib plots for the elbow curve and final clusters
 - Reproducible runs with `random_state`
 
@@ -43,7 +43,7 @@ k-means/
 └── kmeans/
     ├── __init__.py
     ├── model.py         # KMeans class (fit, predict, elbow)
-    └── viz.py           # plot_inertia, plot_clusters
+    └── viz.py           # plot_SSE, plot_clusters
 ```
 
 ## Installation
@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-Run the demo (synthetic blobs → elbow plot → fit → cluster plot):
+Run the demo (data → elbow plot → fit → cluster plot):
 
 ```bash
 python main.py
@@ -65,7 +65,7 @@ python main.py
 The demo:
 
 1. Generates 4 Gaussian clusters in 2D
-2. Computes inertia for `K = 1..10` and plots the elbow curve
+2. Computes SSE for `K = 1..10` and plots the elbow curve
 3. Fits K-Means with `K = 4`
 4. Plots the clustered points and centroids
 
@@ -73,19 +73,19 @@ The demo:
 
 ```python
 import numpy as np
-from kmeans import KMeans, plot_clusters, plot_inertia
+from kmeans import KMeans, plot_clusters, plot_SSE
 
 X = np.random.randn(300, 2)
 
 # choose K with the elbow method
 model = KMeans(random_state=42)
-inertias = model.elbow(X, max_clusters=10)
-plot_inertia(inertias)
+SSE = model.elbow(X, max_clusters=10)
+plot_SSE(SSE)
 
 # fit and visualize
 model = KMeans(n_clusters=3, random_state=42)
 model.fit(X)
-print(model.inertia_)
+print(model.SSE_)
 print(model.centroids)
 
 plot_clusters(X, model.labels, model.centroids)
@@ -100,4 +100,4 @@ plot_clusters(X, model.labels, model.centroids)
 | `tol` | `1e-4` | Stop early when max centroid shift is below this |
 | `random_state` | `None` | Seed for reproducible centroid initialization |
 
-After `fit`, the model stores `centroids`, `labels`, and `inertia_`.
+After `fit`, the model stores `centroids`, `labels`, and `SSE_`.

@@ -25,7 +25,7 @@ def main():
     model = KMeans(n_clusters=k, random_state=42)
     model.fit(X)
     print(f"\nFitted K={k}")
-    print(f"Inertia: {model.inertia_:.2f}")
+    print(f"Inertia: {model.SSE_:.2f}")
     print(f"Centroids:\n{model.centroids}")
 
     plot_clusters(X, model.labels, model.centroids, title=f"K-Means (K={k})")

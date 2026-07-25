@@ -1,15 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-def plot_inertia(inertias, title="Elbow Method"):
+def plot_SSE(inertias, title="Elbow Method"):
     inertias = np.asarray(inertias)
     ks = np.arange(1, len(inertias) + 1)
 
     plt.figure(figsize=(7, 4))
     plt.plot(ks, inertias, marker="o")
     plt.xlabel("Number of clusters (K)")
-    plt.ylabel("Inertia (WCSS)")
+    plt.ylabel("SSE")
     plt.title(title)
     plt.xticks(ks)
     plt.grid(True, alpha=0.3)

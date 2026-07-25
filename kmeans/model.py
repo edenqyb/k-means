@@ -8,7 +8,7 @@ class KMeans:
         self.random_state = random_state
         self.centroids = None
         self.labels = None
-        self.inertia_ = None
+        self.SSE_ = None
 
     def fit(self, X):
         X = np.asarray(X, dtype=float)
@@ -46,13 +46,13 @@ class KMeans:
         self.centroids = centroids
         self.labels = labels
         # sum of squared distances to assigned centroid
-        self.inertia_ = ((X - centroids[labels]) ** 2).sum()
+        self.SSE_ = ((X - centroids[labels]) ** 2).sum()
         return self
 
     # elbow method to find the optimal number of clusters
     def elbow(self, X, max_clusters=10):
         X = np.asarray(X, dtype=float)
-        inertias = np.empty(max_clusters)
+        SSE = np.empty(max_clusters)
         for k in range(1, max_clusters + 1):
             model = KMeans(
                 n_clusters=k,
@@ -61,8 +61,8 @@ class KMeans:
                 random_state=self.random_state,
             )
             model.fit(X)
-            inertias[k - 1] = model.inertia_
-        return inertias
+            SSE[k - 1] = model.SSE_
+        return SSE
 
     def predict(self, X):
         X = np.asarray(X, dtype=float)
