@@ -15,7 +15,6 @@ def plot_SSE(inertias, title="Elbow Method"):
     plt.tight_layout()
     plt.show()
 
-
 def plot_clusters(X, labels, centroids, title="K-Means Clusters"):
     X = np.asarray(X)
     labels = np.asarray(labels)

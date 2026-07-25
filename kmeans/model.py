@@ -36,12 +36,11 @@ class KMeans:
                 else:
                     new_centroids[k] = X[rng.integers(0, n_samples)]
 
+            centroids = new_centroids
+
             # check for convergence before overwriting
             if np.linalg.norm(new_centroids - centroids, axis=1).max() < self.tol:
-                centroids = new_centroids
                 break
-
-            centroids = new_centroids
 
         self.centroids = centroids
         self.labels = labels
