@@ -15,7 +15,7 @@ def main():
     # elbow plot to help choose K
     model = KMeans(random_state=42)
     inertias = model.elbow(X, max_clusters=10)
-    print("Inertias for K=1..10:")
+    print("Inertias for K=1..max_clusters:")
     for k, inertia in enumerate(inertias, start=1):
         print(f"  K={k}: {inertia:.2f}")
     plot_inertia(inertias)
